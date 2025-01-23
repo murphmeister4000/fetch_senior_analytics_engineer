@@ -14,6 +14,29 @@ If you have a cloud provider account (AWS, GCP, Azure) you can quickly create a 
 
 To setup your environment...
 1. Create Snowflake account (and Cloud provider account) if you do not already have one.
-2. Upload JSON files locally using the "Upload local files" functionality on the [Web Interface](https://docs.snowflake.com/en/user-guide/data-load-web-ui)
-   * This helps us get up and running quickly rather than storing the file in our Cloud Provider account (e.g. S3 bucket) and then having to configure permissions between the provider and snowflake.
-3. Run the code in
+2. Follow the steps and run the code outlined in the [snowflake setup](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/snowflake_data_setup.sql) sql file in the repo.
+    1. Initialize the databases and schemas
+    2. Upload JSON files locally using the "Upload local files" functionality on the [Web Interface](https://docs.snowflake.com/en/user-guide/data-load-web-ui)
+        * This helps us get up and running quickly rather than storing the file in our Cloud Provider account (e.g. S3 bucket) and then having to configure permissions between the provider and snowflake.
+    3. Created structured tables from the JSON files
+
+### Run Queries to Answer the Questions
+Run the code in the [SQL Queries](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/sql_queries.sql) file in the repo
+
+Assumptions and answers for each question are commented in the code
+
+## PART 3: Evaluate Data Quality Issues in the Data Provided
+There are two files that contain code for data evaluation
+1. [Data Quality Python Checks](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/data_quality_python_checks.py)
+    * This is for a quick general overview of each file using pandas.
+    * The data could be more modularized, but again for simplicity's sake and for a quick analysis I left it as is.
+2. [Data Quality SQL Checks](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/data_quality_sql_checks.sql)
+    * This is first used as a sanity check to make sure the uploaded data was uploaded properly
+    * Next this is used for more specific data checks related to some of the questions in part 2
+        * Are unique keys unique?
+        * Do join keys have a high match rate between tables?
+        * How is pricing evaluated between receipts and items?
+        * Do some columns have gaps only in certain months?
+
+## PART 4: Communicate with Stakeholders
+Please see the text file ...
