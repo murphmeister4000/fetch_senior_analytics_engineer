@@ -19,7 +19,7 @@ To setup your environment...
 2. Follow the steps and run the code outlined in the [snowflake setup](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/snowflake_data_setup.sql) sql file in the repo.
     1. Initialize the databases and schemas
     2. Upload JSON files locally using the "Upload local files" functionality on the [Web Interface](https://docs.snowflake.com/en/user-guide/data-load-web-ui)
-        * This helps us get up and running quickly rather than storing the file in our Cloud Provider account (e.g. S3 bucket) and then having to configure permissions between the provider and snowflake.
+        * This helps us get up and running quickly rather than storing the files in our Cloud Provider account (e.g. S3 bucket) and then having to configure permissions between the provider and snowflake.
     3. Created structured tables from the JSON files
 
 ### Run Queries to Answer the Questions
