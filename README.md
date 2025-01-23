@@ -31,7 +31,7 @@ Assumptions and answers for each question are commented in the code
 There are two files that contain code for data evaluation
 1. [Data Quality Python Checks](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/data_quality_python_checks.py)
     * This is for a quick general overview of each file using pandas.
-    * The data could be more modularized, but again for simplicity's sake and for a quick analysis I left it as is.
+    * The code could be more modularized, but again for simplicity's sake and for a quick analysis I left it as is.
 2. [Data Quality SQL Checks](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/data_quality_sql_checks.sql)
     * This is first used as a sanity check to make sure the uploaded data was uploaded properly
     * Next this is used for more specific data checks related to some of the questions in part 2
