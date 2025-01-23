@@ -39,4 +39,4 @@ There are two files that contain code for data evaluation
         * Do some columns have gaps only in certain months?
 
 ## PART 4: Communicate with Stakeholders
-Please see the text file ...
+Please see the markdown file [Message To Stakeholders](https://github.com/murphmeister4000/fetch_senior_analytics_engineer/blob/main/message_to_stakeholders.md)
