@@ -122,6 +122,8 @@ order by 2 desc
 -- To combat this I will assume Change Data Capture is not working properly and when User Profiles are updated a new row is appended to the Users table and the old data is not purged or moved to a CDC type historical table.
 -- To deduplicate manually I will take the row with the most recent Create Date to assume this is the most up to date info we have on a user
 -- Similar to question 1, I will again be assuming that we can only identify a brand by it's Brand Name so we will need to join the brands table
+-- I am also assuming that total_price from receipts.json is equal to the sum of final_price_total (the price of each item from the rewardsReceiptItemList field).
+-- In the data quality check I prove this assumption doesn't always hold true, but for simplicity's sake I will still use the assumption for this question.
 with receipt_items as (
     select * from fetch_db.fetch.receipt_items
 ),
@@ -154,7 +156,7 @@ limit 5
 
 -- ###### QUESTION 6 ######
 -- I will be assuming that by transaction we mean a purchase AKA a single receipt.
--- Same exact query as Question 5, just with a different metric. Need a sepearate query to get the ranking correct for the new metric
+-- Same exact query and assumptions as Question 5, just with a different metric. Need a sepearate query to get the ranking correct for the new metric
 with receipt_items as (
     select * from fetch_db.fetch.receipt_items
 ),

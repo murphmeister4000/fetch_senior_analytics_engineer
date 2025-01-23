@@ -47,9 +47,9 @@ order by 2 desc;
 
 
 
--- AD-HOC QUESTION SPECIFIC DATA CHECKS: Data checks I did as I was trying to answer the the questions in part 2 of the exercise. Primarily for questions 1 and 2.
+-- ########## AD-HOC QUESTION SPECIFIC DATA CHECKS: Data checks I did as I was trying to answer the the questions in part 2 of the exercise. ##########
 
--- Questions 1 and 2
+-- #### Data Quality issues with brand_code & barcode and with matching joins between receipt_items and receipts ####
 -- I noticed only certain months had valid brand codes and barcodes. Check the receipt item table individually for months with gaps in these columns
 select distinct date_trunc('month', scanned_date) from fetch_db.fetch.receipt_items where brand_code is not null order by 1 desc;
 select distinct date_trunc('month', scanned_date) from fetch_db.fetch.receipt_items where barcode is not null order by 1 desc;
@@ -87,3 +87,38 @@ where 1=1
 group by 1,2
 order by 2 desc, 5
 ;
+
+
+-- #### Data Quality of the Receipt Item List. Do all receipts have a list of items? No. ####
+select
+    sum(case when rewards_receipt_item_list is null then 1 else 0 end) as null_rewards_receipt_item_list,
+    sum(case when rewards_receipt_item_list is null then 1 else 0 end) / count(*) as percent_null
+from fetch_db.fetch.receipts
+;
+
+
+-- #### Data Quality/Consistency of price fields ####
+-- Does the totalSpent field from the receipt equal the sum of each individual price (finalPrice) from the item list in the receipt
+with receipt_totals as (
+    select
+        receipt_items.receipt_id,
+        sum(receipt_items.final_price_total) as receipt_items_price_total,
+        sum(receipts.total_spent) as receipts_total_spent
+    from fetch_db.fetch.receipt_items
+    inner join fetch_db.fetch.receipts
+        on receipt_items.receipt_id = receipts.receipt_id
+    group by 1
+    order by 1
+)
+select
+    sum(case when receipt_items_price_total != receipts_total_spent then 1 else 0 end) as count_prices_not_equal,
+    sum(case when receipt_items_price_total != receipts_total_spent then 1 else 0 end) / count(*) as percent_not_equal
+from receipt_totals
+;
+
+
+-- #### Quick Upload Sanity check ####
+-- Make sure row counts match counts in the python data quality check
+select count(*) as row_count from fetch_db.fetch.users;
+select count(*) as row_count from fetch_db.fetch.brands;
+select count(*) as row_count from fetch_db.fetch.receipts;
