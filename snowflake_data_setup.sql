@@ -1,4 +1,4 @@
--- ######## STEP 2: INITIALIZE DATABASE AND SCHEMAS ########
+-- ######## STEP 1: INITIALIZE DATABASE AND SCHEMAS ########
 --For simplicity's sake (and if possible) run as admin or another role that can create databases, schemas, and tables.
 CREATE DATABASE IF NOT EXISTS fetch_db;
 CREATE SCHEMA IF NOT EXISTS fetch_raw;
